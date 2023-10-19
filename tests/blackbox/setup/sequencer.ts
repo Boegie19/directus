@@ -4,7 +4,7 @@ import { BaseSequencer, type WorkspaceSpec } from 'vitest/node';
 import { sequentialTestsList } from './sequential-tests';
 
 export default class CustomSequencer extends BaseSequencer {
-	/*override async sort(files: WorkspaceSpec[]) {
+	override async sort(files: WorkspaceSpec[]) {
 		console.log(this.ctx)
 		if (files.length > 1) {
 			// If specified, only run these tests sequentially
@@ -58,8 +58,8 @@ export default class CustomSequencer extends BaseSequencer {
 		}
 
 		// Expose sequencer data to setup & tests
-		await fs.writeFile('sequencer-data.json', JSON.stringify({ totalTestsCount: files.length }));
+		//await fs.writeFile('sequencer-data.json', JSON.stringify({ totalTestsCount: files.length }));
 
 		return files;
-	}*/
+	}
 }
