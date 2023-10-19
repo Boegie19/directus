@@ -24,7 +24,7 @@
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
-		"test": "vitest --watch=false",
+		"test": "vitest run",
 		"story:dev": "histoire dev",
 		"story:build": "histoire build",
 		"story:preview": "histoire preview"

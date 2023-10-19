@@ -29,7 +29,7 @@
 		"build:node": "tsup node/index.ts --tsconfig node/tsconfig.json --out-dir dist/node --format=esm --dts",
 		"build:shared": "tsup shared/index.ts --tsconfig shared/tsconfig.json --out-dir dist/shared --format=esm --dts",
 		"dev": "concurrently 'pnpm:build:* --watch'",
-		"test": "vitest --watch=false"
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"@directus/constants": "workspace:*",
