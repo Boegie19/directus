@@ -10,17 +10,15 @@ export default <Environment>{
 	transformMode: 'ssr',
 
 	async setup(global) {
-		const { totalTestsCount } = JSON.parse(await fs.readFile('sequencer-data.json', 'utf8'));
 		const testFilePath = global.__vitest_worker__.ctx.files[0].split('blackbox')[1];
 		const serverUrl = process.env['serverUrl'];
 
-		if (!serverUrl || isNaN(totalTestsCount)) {
+		if (!serverUrl) {
 			throw 'Missing flow env variables';
 		}
 
-		const testIndex = getReversedTestIndex(testFilePath);
 
-		while (testIndex !== 0) {
+		while (true) {
 			try {
 				const response = await axios.get(`${serverUrl}/items/tests_flow_completed`, {
 					params: {
@@ -31,11 +29,7 @@ export default <Environment>{
 					},
 				});
 
-				const completedCount = Number(response.data.data[0].count.id);
-
-				if (testIndex >= 0) {
-					if (completedCount >= testIndex) break;
-				} else if (totalTestsCount + testIndex === completedCount) {
+				if (global.__vitest_worker__.environmentTeardownRun) {
 					break;
 				}
 			} catch (err) {
